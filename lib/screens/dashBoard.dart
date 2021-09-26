@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -121,61 +122,125 @@ class _DashBoardState extends State<DashBoard> {
               ],),
               SizedBox(height:10),
               Expanded(
-                child:GridView.builder(
-                    physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    ),
-                    itemCount: 6,
-                    itemBuilder: (BuildContext context, int index) {
-                    return InkWell(
-                      onTap: (){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => MedView()),
-                        );
-                      },
-                      child: Column(
-                        children: [
-                          Container(
-                            height: 158,
-                            width: 200,
-                            padding: EdgeInsets.only(top: 5),
-                            margin: EdgeInsets.only(left:5,right: 5,bottom: 3),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Color(0xffF5F5FD)
+                child:StreamBuilder<QuerySnapshot>(
+                  stream: FirebaseFirestore.instance.collection('medicines').snapshots(),
+                  builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
+                    return !snapshot.hasData? Text("no")
+                    :GridView.builder(
+                            physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+                            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
                             ),
+                            itemCount: 6,
+                            itemBuilder: (BuildContext context, int index) {
+                              QueryDocumentSnapshot x = snapshot.data!.docs[index];
+                            return InkWell(
+                              onTap: (){
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => MedView(dosage: x['dosage'],name: x['name'], price: x['price'], quantity: x['quantity'], dosageform:x['dosageform'], manufacture: x['manufacture'],image:x['image'])),
+                                );
+                              },
+                              child: Column(
+                                children: [
+                                  Container(
+                                    height: 158,
+                                    width: 200,
+                                    padding: EdgeInsets.only(top: 5),
+                                    margin: EdgeInsets.only(left:5,right: 5,bottom: 10),
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: Color(0xffF5F5FD)
+                                    ),
 
 
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Image.asset('assets/ibu.png', width: 130, ),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        //Image.asset('assets/ibu.png', width: 130, ),
+                                        Image.network(x['image'],width: 140,),
+                                        Row(
+                                          children: [
+                                            SizedBox(width: 20,),
+                                            Text(x['name'], style: GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.w500),),
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            SizedBox(width: 20,),
+                                            Text("Tablets * "+x['quantity'].toString()+" pieces", style: GoogleFonts.poppins(fontSize: 10, fontWeight: FontWeight.w500,color: Colors.grey),),
+                                          ],
+                                        ),
 
-                                Row(
-                                  children: [
-                                    SizedBox(width: 20,),
-                                    Text("Ibuprofen", style: GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.w500),),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    SizedBox(width: 20,),
-                                    Text("Tablets * 50 peices", style: GoogleFonts.poppins(fontSize: 10, fontWeight: FontWeight.w500,color: Colors.grey),),
-                                  ],
-                                ),
-
-                              ],
-                            ),
+                                      ],
+                                    ),
 
 
-                          ),
-                        ],
-                      ),
-                    );
-                    }
-                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                            }
+                            );
+                  },
+
+
+                ),
+                // child:GridView.builder(
+                //     physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+                //     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                //     crossAxisCount: 2,
+                //     ),
+                //     itemCount: 6,
+                //     itemBuilder: (BuildContext context, int index) {
+                //     return InkWell(
+                //       onTap: (){
+                //         Navigator.push(
+                //           context,
+                //           MaterialPageRoute(builder: (context) => MedView()),
+                //         );
+                //       },
+                //       child: Column(
+                //         children: [
+                //           Container(
+                //             height: 158,
+                //             width: 200,
+                //             padding: EdgeInsets.only(top: 5),
+                //             margin: EdgeInsets.only(left:5,right: 5,bottom: 3),
+                //             decoration: BoxDecoration(
+                //                 borderRadius: BorderRadius.circular(10),
+                //                 color: Color(0xffF5F5FD)
+                //             ),
+                //
+                //
+                //             child: Column(
+                //               crossAxisAlignment: CrossAxisAlignment.start,
+                //               children: [
+                //                 Image.asset('assets/ibu.png', width: 130, ),
+                //
+                //                 Row(
+                //                   children: [
+                //                     SizedBox(width: 20,),
+                //                     Text("Ibuprofen", style: GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.w500),),
+                //                   ],
+                //                 ),
+                //                 Row(
+                //                   children: [
+                //                     SizedBox(width: 20,),
+                //                     Text("Tablets * 50 peices", style: GoogleFonts.poppins(fontSize: 10, fontWeight: FontWeight.w500,color: Colors.grey),),
+                //                   ],
+                //                 ),
+                //
+                //               ],
+                //             ),
+                //
+                //
+                //           ),
+                //         ],
+                //       ),
+                //     );
+                //     }
+                //     ),
 
 
 

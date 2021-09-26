@@ -4,7 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:like_button/like_button.dart';
 
 class MedView extends StatefulWidget {
-  const MedView({Key? key}) : super(key: key);
+  final String name,dosageform,image,manufacture,price, quantity,dosage;
+  const MedView({Key? key, required this.name, required this.dosageform, required this.image, required this.manufacture, required this.dosage, required this.price, required this.quantity}) : super(key: key);
 
   @override
   _MedViewState createState() => _MedViewState();
@@ -24,7 +25,8 @@ class _MedViewState extends State<MedView> {
         child: Container(
           child: Column(
             children: [
-              Image.asset('assets/ibu.png',height: 270,width: 370,),
+              Image.network(widget.image,width: 370,height: 270,),
+              //Image.asset('assets/ibu.png',height: 270,width: 370,),
 
               Expanded(
                 child: Container(
@@ -47,7 +49,7 @@ class _MedViewState extends State<MedView> {
 
                       Row(
                         children: [
-                          Text("Ibuprofen", style: GoogleFonts.poppins(fontSize: 25,fontWeight: FontWeight.w600,),),
+                          Text(widget.name, style: GoogleFonts.poppins(fontSize: 25,fontWeight: FontWeight.w600,),),
                           Spacer(),
                           LikeButton(
                             circleColor:
@@ -61,10 +63,10 @@ class _MedViewState extends State<MedView> {
                         ],
                       ),
                       SizedBox(height: 5,),
-                      Text("Tablets * 50 pieces", style: GoogleFonts.poppins(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.grey),),
+                      Text("Tablets * "+widget.quantity+" pieces", style: GoogleFonts.poppins(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.grey),),
 
                       SizedBox(height: 30,),
-                      Text(r"$ 4.69", style: GoogleFonts.poppins(fontSize: 25,fontWeight: FontWeight.w500,),),
+                      Text(r"$ "+widget.price, style: GoogleFonts.poppins(fontSize: 25,fontWeight: FontWeight.w500,),),
                       SizedBox(height:20),
 
                       Row(
@@ -73,7 +75,7 @@ class _MedViewState extends State<MedView> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text("Dosage form", style: GoogleFonts.poppins(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.grey),),
-                              Text("Pills", style: GoogleFonts.poppins(fontSize: 16,fontWeight: FontWeight.w600),),
+                              Text(widget.dosageform, style: GoogleFonts.poppins(fontSize: 16,fontWeight: FontWeight.w600),),
                             ],
                           ),
                           Spacer(),
@@ -81,7 +83,7 @@ class _MedViewState extends State<MedView> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text("Active subtance", style: GoogleFonts.poppins(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.grey),),
-                              Text("Ibuprofen", style: GoogleFonts.poppins(fontSize: 16,fontWeight: FontWeight.w600),),
+                              Text(widget.name, style: GoogleFonts.poppins(fontSize: 16,fontWeight: FontWeight.w600),),
                             ],
                           ),
                           SizedBox(width:24)
@@ -94,7 +96,7 @@ class _MedViewState extends State<MedView> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text("Dosage          ", style: GoogleFonts.poppins(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.grey),),
-                              Text("0.2 g", style: GoogleFonts.poppins(fontSize: 16,fontWeight: FontWeight.w600),),
+                              Text(widget.dosage+" mg", style: GoogleFonts.poppins(fontSize: 16,fontWeight: FontWeight.w600),),
                             ],
                           ),
                           Spacer(),
@@ -102,7 +104,7 @@ class _MedViewState extends State<MedView> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text("Manufacture       ", style: GoogleFonts.poppins(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.grey),),
-                              Text("Biosyn, Russia", style: GoogleFonts.poppins(fontSize: 16,fontWeight: FontWeight.w600),),
+                              Text(widget.manufacture, style: GoogleFonts.poppins(fontSize: 16,fontWeight: FontWeight.w600),),
                             ],
                           ),
                           SizedBox(width:24),
