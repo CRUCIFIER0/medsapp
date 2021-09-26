@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "900200149919",
+    "project_id": "medsapp-54e43",
+    "storage_bucket": "medsapp-54e43.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:900200149919:android:77115349c037e5576d83aa",
+        "android_client_info": {
+          "package_name": "com.example.medsapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "900200149919-2el40e2isrvb97uj13mmis1pilv2ecjh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.medsapp",
+            "certificate_hash": "7205e5c629ff8a7b2624e1a11bf8e773fd2e9f7b"
+          }
+        },
+        {
+          "client_id": "900200149919-qg133frci03a4e3io8v59ihbna462ruu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAb_w8QNgYRwY49IPdkuW4-20iGHtWlJL0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "900200149919-qg133frci03a4e3io8v59ihbna462ruu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

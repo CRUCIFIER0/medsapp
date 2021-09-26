@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:medsapp/screens/MedView.dart';
+import 'package:medsapp/services/authService.dart';
 import 'package:unicons/unicons.dart';
 
 class DashBoard extends StatefulWidget {
@@ -12,6 +13,7 @@ class DashBoard extends StatefulWidget {
 }
 
 class _DashBoardState extends State<DashBoard> {
+  AuthService auth = new AuthService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,15 +32,15 @@ class _DashBoardState extends State<DashBoard> {
               SizedBox(height:0,),
               Row(
                 children: [
-                  Text("Hi,", style: GoogleFonts.poppins(fontSize: 25, fontWeight: FontWeight.w400),),
-                  Text(" Nathan!", style: GoogleFonts.poppins(fontSize: 25, fontWeight: FontWeight.w700),),
+                  Text("Hi, ", style: GoogleFonts.poppins(fontSize: 25, fontWeight: FontWeight.w400),),
+                  Text(auth.firebaseAuth.currentUser!.displayName!+"!", style: GoogleFonts.poppins(fontSize: 25, fontWeight: FontWeight.w700),),
                   Spacer(),
                   Container(
                     height: 50.0,
                     width: 50.0,
                     decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: NetworkImage("https://cdn.dribbble.com/users/2155131/screenshots/15602364/media/e3954ef71c85884e78b384bf264dd5c4.jpg?compress=1&resize=1000x750"),
+                          image: NetworkImage(auth.firebaseAuth.currentUser!.photoURL!.toString()),
                           fit: BoxFit.cover,
                         ),
                         borderRadius: BorderRadius.all(Radius.circular(25))
@@ -101,7 +103,7 @@ class _DashBoardState extends State<DashBoard> {
                                     )
                                 )
                             ),
-                            onPressed: () => null
+                            onPressed: (){ AuthService().logout();}
                         )
                       ],
                     ),
