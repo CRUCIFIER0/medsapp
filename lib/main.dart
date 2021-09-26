@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medsapp/screens/MedView.dart';
 import 'package:medsapp/screens/dashBoard.dart';
 
 void main() {

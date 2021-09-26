@@ -105,7 +105,7 @@ class _DashBoardState extends State<DashBoard> {
                         )
                       ],
                     ),
-                    Image.asset('assets/meds.png',height: 100,width: 150,)
+                    Image.asset('assets/meds.png',height: 150,width: 150,)
 
                   ],
                 ),
@@ -120,6 +120,7 @@ class _DashBoardState extends State<DashBoard> {
               SizedBox(height:10),
               Expanded(
                 child:GridView.builder(
+                    physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     ),
@@ -135,10 +136,10 @@ class _DashBoardState extends State<DashBoard> {
                       child: Column(
                         children: [
                           Container(
-                            height: 160,
+                            height: 158,
                             width: 200,
                             padding: EdgeInsets.only(top: 5),
-                            margin: EdgeInsets.only(right: 10),
+                            margin: EdgeInsets.only(left:5,right: 5,bottom: 3),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 color: Color(0xffF5F5FD)
@@ -148,7 +149,7 @@ class _DashBoardState extends State<DashBoard> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Image.asset('assets/ibu.png', ),
+                                Image.asset('assets/ibu.png', width: 130, ),
 
                                 Row(
                                   children: [
